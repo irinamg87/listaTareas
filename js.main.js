@@ -28,24 +28,28 @@ function createList(lista) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    var input = document.getElementById('dropdown-list');
+    if (localStorage['dropdown-list']) {
+        input.value = localStorage['dropdown-list'];
+    }
+    input.onchange = function () {
+        localStorage['dropdown-list'] = this.value;
+    }
+});
+
 agregarBoton.addEventListener('click', (event) => {
     event.preventDefault();
 
-
     const text = input.value;
-    const li = document.createElement('li');
-    const p = document.createElement('p');
 
     var lista = [
         {
             'idTarea': listaTareas.length,
             'titulo': text,
-            'prioridad': "urgente"
+            'prioridad': localStorage['dropdown-list']
         }
     ]
-
-
-    p.textContent = text;
 
     if (text !== "") {
         createList(lista)
